@@ -9,9 +9,6 @@ class AMLAgent(BaseAgent):
     async def run(self, state): 
         await self.emit_event({ "status": "RUNNING", "message": "Running AML screening" }) 
         await asyncio.sleep(2) 
-        state["active_signals"].append( "Linked suspicious entity" ) 
-        state["risk_score"] += 5 
-        state["completed_agents"].append(self.agent_name) 
         await self.emit_event(
             {
                 "status": "COMPLETED",
@@ -63,4 +60,8 @@ class AMLAgent(BaseAgent):
                 }
             }
         )
-        return state
+        return {
+             "active_signals": state["active_signals"] + ["Linked suspicious entity"],
+            "risk_score": state["risk_score"] + 5,
+            "completed_agents": state["completed_agents"] + [self.agent_name]
+        }

@@ -2,11 +2,13 @@ from pydantic import BaseModel
 from agents.approve_agent import ApproveAgent
 from agents.edd_agent import EddAgent
 from agents.compliance_agent import ComplianceAgent
+from agents.reject_agent import RejectAgent
 from services.review_store import get_review, remove_review
 from fastapi import APIRouter
 from events.event_manager import event_manager
 
 approve_agent = ApproveAgent()
+reject_agent = RejectAgent()
 edd_agent = EddAgent()
 compliance_agent = ComplianceAgent()
 
@@ -54,7 +56,9 @@ async def review_action(request: ReviewRequest):
         state = await approve_agent.run(state)
     elif state["final_decision"] == "ESCALATED":
         state = await edd_agent.run(state)
-    
+    elif state["final_decision"] == "REJECTED":
+        state = await reject_agent.run(state)
+        
     await compliance_agent.run(state)
 
     remove_review(request.case_id)

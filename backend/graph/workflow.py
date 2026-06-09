@@ -8,15 +8,17 @@ from agents.compliance_agent import ComplianceAgent
 from agents.approve_agent import ApproveAgent
 from agents.edd_agent import EddAgent
 from agents.human_review_agent import HumanReviewAgent
-
+from agents.adverse_media_agent import AdverseMediaAgent
 planner_agent = PlannerAgent() 
 ocr_agent = OCRAgent() 
 aml_agent = AMLAgent() 
+adverse_media_agent = AdverseMediaAgent()
 risk_agent = RiskAgent() 
 compliance_agent = ComplianceAgent() 
 approve_agent = ApproveAgent()
 edd_agent = EddAgent()
 human_review_agent = HumanReviewAgent()
+
 
 def route_after_risk(state):
   
@@ -35,6 +37,7 @@ workflow = StateGraph(InvestigationState)
 workflow.add_node( "planner_agent", planner_agent.run ) 
 workflow.add_node( "ocr_agent", ocr_agent.run ) 
 workflow.add_node( "aml_agent", aml_agent.run ) 
+workflow.add_node("adverse_media_agent", adverse_media_agent.run)
 workflow.add_node( "risk_agent", risk_agent.run ) 
 workflow.add_node( "compliance_agent", compliance_agent.run ) 
 workflow.add_node("approve_agent", approve_agent.run)
@@ -45,7 +48,9 @@ workflow.set_entry_point("planner_agent")
 
 workflow.add_edge( "planner_agent", "ocr_agent" ) 
 workflow.add_edge( "ocr_agent", "aml_agent" ) 
+workflow.add_edge( "ocr_agent", "adverse_media_agent" ) 
 workflow.add_edge( "aml_agent", "risk_agent" ) 
+workflow.add_edge( "adverse_media_agent", "risk_agent" ) 
 workflow.add_edge( "risk_agent", "human_review_agent" ) 
 # workflow.add_conditional_edges( "risk_agent", route_after_risk, {
 #     "APPROVE": "approve_agent",

@@ -19,6 +19,7 @@ class ComplianceAgent(BaseAgent):
             {
                 "status": "COMPLETED",
                 "message": explanation,
+                "phase": "DONE",
                 "state_snapshot": {
                     "final_decision": state["final_decision"],
                     "risk_score": state["risk_score"],

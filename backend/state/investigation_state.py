@@ -10,3 +10,5 @@ class InvestigationState(TypedDict):
     completed_agents: List[str] 
     event_logs: List[Dict[str, Any]] 
     final_decision: str
+    adverse_media_results: list
+    adverse_media_score: int

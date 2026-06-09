@@ -8,7 +8,7 @@ class OCRAgent(BaseAgent):
     async def run(self, state): 
         await self.emit_event({ "status": "RUNNING", "message": "Extracting document data" }) 
         await asyncio.sleep(2) 
-        state["extracted_data"] = { "name": "Arjun Malhotra", "passport": "N882712" } 
+        state["extracted_data"] = { "name": "Arjun Malhotra", "passport": "N882712", "country": "India" } 
         state["completed_agents"].append(self.agent_name) 
         await self.emit_event(
             {
@@ -28,18 +28,14 @@ class OCRAgent(BaseAgent):
                 },
                 "agent_details": {
                     "agent_name": self.agent_name,
-                    # "description": "Performs OCR on uploaded documents to extract relevant data.",
-                    # "capabilities": [
-                    #     "Extract text from images",
-                    #     "Structured data output",
-                    #     "Supports multiple document types"
-                    # ],
+            
                     "input": [
                         "Scanned Passport Image"
                     ],
                     "output": [
                         "Extracted Name",
-                        "Extracted Passport Number"
+                        "Extracted Passport Number",
+                        "Extracted Country"
                     ],
                     "confidence":[
                         "95%"

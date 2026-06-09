@@ -42,6 +42,7 @@ class RiskAgent(BaseAgent):
                     "details": [
                         f"Final Risk Score: {state['risk_score']}",
                         f"Active Signals: {', '.join(state['active_signals'])}",
+                        f"Adverse Media Findings: {', '.join(state['adverse_media_results'])}",
                         f"Final Decision: {decision}"
                     ]
                 },
