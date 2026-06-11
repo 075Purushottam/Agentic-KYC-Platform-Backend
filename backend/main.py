@@ -1,10 +1,10 @@
-from fastapi import FastAPI 
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.routes import router as api_router 
-from websocket.websocket_routes import router as websocket_router 
+from api.routes import router as api_router
+from websocket.websocket_routes import router as websocket_router
 from api.review_routes import router as review_router
 
-app = FastAPI() 
+app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,6 +13,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(api_router) 
+app.include_router(api_router)
 app.include_router(websocket_router)
 app.include_router(review_router)

@@ -1,6 +1,6 @@
 import asyncio 
 from agents.base_agent import BaseAgent 
-
+from services.aml_matcher import AMLScreeningEngine
 class AMLAgent(BaseAgent): 
 
     def __init__(self,agent_name="AML_AGENT"): 
@@ -9,6 +9,11 @@ class AMLAgent(BaseAgent):
     async def run(self, state): 
         await self.emit_event({ "status": "RUNNING", "message": "Running AML screening" }) 
         await asyncio.sleep(2) 
+        # engine = AMLScreeningEngine(
+        #     "sclean_ofac.json",
+        #     "sclean_pep.json"
+        # )
+        # result = engine.run(state['extracted_data'])
         await self.emit_event(
             {
                 "status": "COMPLETED",

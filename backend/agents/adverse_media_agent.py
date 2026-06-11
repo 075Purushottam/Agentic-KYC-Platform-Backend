@@ -1,6 +1,7 @@
 # agents/adverse_media_agent.py
 
 from agents.base_agent import BaseAgent
+from services.adverse_search import search
 import asyncio
 
 class AdverseMediaAgent(BaseAgent):
@@ -16,6 +17,7 @@ class AdverseMediaAgent(BaseAgent):
         })
 
         await asyncio.sleep(2)
+        # result = search(state['extracted_data'])
 
         findings = [
             "Customer linked to procurement fraud article",

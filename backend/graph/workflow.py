@@ -9,6 +9,8 @@ from agents.approve_agent import ApproveAgent
 from agents.edd_agent import EddAgent
 from agents.human_review_agent import HumanReviewAgent
 from agents.adverse_media_agent import AdverseMediaAgent
+from agents.document_quality_agent import DocumentQualityAgent
+
 planner_agent = PlannerAgent() 
 ocr_agent = OCRAgent() 
 aml_agent = AMLAgent() 
@@ -18,7 +20,7 @@ compliance_agent = ComplianceAgent()
 approve_agent = ApproveAgent()
 edd_agent = EddAgent()
 human_review_agent = HumanReviewAgent()
-
+document_quality_agent = DocumentQualityAgent()
 
 def route_after_risk(state):
   
@@ -41,12 +43,13 @@ workflow.add_node("adverse_media_agent", adverse_media_agent.run)
 workflow.add_node( "risk_agent", risk_agent.run ) 
 workflow.add_node( "compliance_agent", compliance_agent.run ) 
 workflow.add_node("approve_agent", approve_agent.run)
+workflow.add_node("document_quality_agent", document_quality_agent.run)
 workflow.add_node("edd_agent", edd_agent.run)
 workflow.add_node("human_review_agent", human_review_agent.run)
 
-workflow.set_entry_point("planner_agent") 
+workflow.set_entry_point("document_quality_agent") 
 
-workflow.add_edge( "planner_agent", "ocr_agent" ) 
+workflow.add_edge( "document_quality_agent", "ocr_agent" ) 
 workflow.add_edge( "ocr_agent", "aml_agent" ) 
 workflow.add_edge( "ocr_agent", "adverse_media_agent" ) 
 workflow.add_edge( "aml_agent", "risk_agent" ) 
