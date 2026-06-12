@@ -1,0 +1,14 @@
+2026-06-11 23:53:57,082 - fastapi - Form data requires "python-multipart" to be installed. 
+You can install "python-multipart" with: 
+
+pip install python-multipart
+
+2026-06-11 23:58:03,077 - watchfiles.main - 4 changes detected
+2026-06-11 23:58:03,496 - watchfiles.main - 1 change detected
+2026-06-12 00:12:25,821 - watchfiles.main - 3 changes detected
+2026-06-12 00:12:26,230 - watchfiles.main - 1 change detected
+2026-06-12 00:13:03,213 - watchfiles.main - 1 change detected
+2026-06-12 00:14:14,253 - watchfiles.main - 2 changes detected
+2026-06-12 00:14:15,919 - watchfiles.main - 5 changes detected
+2026-06-12 00:15:21,096 - watchfiles.main - 3 changes detected
+2026-06-12 00:16:52,767 - watchfiles.main - 1 change detected

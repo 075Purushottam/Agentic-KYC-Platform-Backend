@@ -7,7 +7,7 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_huggingface import HuggingFaceEmbeddings
 
 # Assuming create_documents handles parsing raw articles to LangChain Document objects
-from utils import create_documents
+from services.utils import create_documents
 
 # Setup logging for production readiness
 logging.basicConfig(filename='app.log',filemode='a',level=logging.INFO,format='%(asctime)s - %(name)s - %(message)s')
