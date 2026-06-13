@@ -9,11 +9,12 @@ class AMLAgent(BaseAgent):
     async def run(self, state): 
         await self.emit_event({ "status": "RUNNING", "message": "Running AML screening" }) 
         await asyncio.sleep(2) 
-        # engine = AMLScreeningEngine(
-        #     "sclean_ofac.json",
-        #     "sclean_pep.json"
-        # )
-        # result = engine.run(state['extracted_data'])
+        ofac = r"C:\Users\Tirupati\Desktop\agentic-kyc-platform\Agentic-KYC-Platform-Backend\backend\uploads\clean_ofac.json"
+        pep = r"C:\Users\Tirupati\Desktop\agentic-kyc-platform\Agentic-KYC-Platform-Backend\backend\uploads\clean_pep.json"
+        engine = AMLScreeningEngine(
+            ofac,pep
+        )
+        result = engine.run(state['extracted_data'])
         await self.emit_event(
             {
                 "status": "COMPLETED",
