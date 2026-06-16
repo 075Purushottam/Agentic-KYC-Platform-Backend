@@ -24,6 +24,6 @@ def ocr_image(image_path):
             res+=line
     return str(res)
 
-image_path = r"C:\Users\Tirupati\Desktop\agentic-kyc-platform\Agentic-KYC-Platform-Backend\backend\uploads\CASE-1aeb0be3\pancard-images-0.jpg"
+# image_path = r"C:\Users\Tirupati\Desktop\agentic-kyc-platform\Agentic-KYC-Platform-Backend\backend\uploads\CASE-1aeb0be3\pancard-images-0.jpg"
 
-print(ocr_image(image_path))
+# print(ocr_image(image_path))

@@ -46,7 +46,13 @@ async def upload_documents(
         "completed_agents": [],
         "event_logs": [],
         "final_decision": "",
-        "adverse_media_results": [],
+        "adverse_media_results": {},
+        "document_quality_results": {},
+        "ocr_results": {},
+        "aml_results": {},
+        "risk_results": {},
+        "human_review_results": {},
+        "compliance_results": {},
         "adverse_media_score": 0
     }
 

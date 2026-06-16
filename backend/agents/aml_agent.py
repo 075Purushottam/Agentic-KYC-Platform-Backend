@@ -8,15 +8,14 @@ class AMLAgent(BaseAgent):
 
     async def run(self, state): 
         await self.emit_event({ "status": "RUNNING", "message": "Running AML screening" }) 
-        await asyncio.sleep(2) 
+        # await asyncio.sleep(2) 
         ofac = r"C:\Users\Tirupati\Desktop\agentic-kyc-platform\Agentic-KYC-Platform-Backend\backend\uploads\clean_ofac.json"
         pep = r"C:\Users\Tirupati\Desktop\agentic-kyc-platform\Agentic-KYC-Platform-Backend\backend\uploads\clean_pep.json"
         engine = AMLScreeningEngine(
             ofac,pep
         )
         result = engine.run(state['extracted_data'])
-        await self.emit_event(
-            {
+        agent_results =             {
                 "status": "COMPLETED",
                 "message": "AML risk detected",
                 "risk_score": state["risk_score"],
@@ -38,12 +37,6 @@ class AMLAgent(BaseAgent):
 
                 "agent_details": {
                     "agent_name": self.agent_name,
-                    # "description": "Performs AML screening against watchlists and PEP databases.",
-                    # "capabilities": [
-                    #     "Screening against global watchlists",
-                    #     "PEP (Politically Exposed Persons) detection",
-                    #     "Adverse media monitoring"
-                    # ],
                     "input": [
                         "Paassport Data",
                         "Customer Identity"
@@ -65,9 +58,12 @@ class AMLAgent(BaseAgent):
 
                 }
             }
+        state['aml_results']=agent_results
+        await self.emit_event(
+            agent_results
         )
         return {
-             "active_signals": state["active_signals"] + ["Linked suspicious entity"],
+            "active_signals": state["active_signals"] + ["Linked suspicious entity"],
             "risk_score": state["risk_score"] + 5,
             "completed_agents": state["completed_agents"] + [self.agent_name]
         }

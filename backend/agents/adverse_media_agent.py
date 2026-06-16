@@ -2,6 +2,7 @@
 
 from agents.base_agent import BaseAgent
 from services.adverse_search import search
+from agents.ocr_prompt import refine_adverse_result
 import asyncio
 
 class AdverseMediaAgent(BaseAgent):
@@ -16,17 +17,16 @@ class AdverseMediaAgent(BaseAgent):
             "message": "Searching adverse media sources"
         })
 
-        await asyncio.sleep(2)
-        # result = search(state['extracted_data'])
+        # await asyncio.sleep(2)
+        # adverse_context = search(state['extracted_data'])
+        # results = refine_adverse_result(state['extracted_data'],adverse_context)
+        # print("Adverse Media Results:",results)
 
         findings = [
             "Customer linked to procurement fraud article",
             "Mentioned in regulatory investigation"
         ]
-
-
-
-        await self.emit_event({
+        agent_results = {
             "status": "COMPLETED",
             "message": "Adverse media findings detected",
 
@@ -51,7 +51,9 @@ class AdverseMediaAgent(BaseAgent):
                 "confidence": ["87%"],
                 "risk_impact": ["+25"]
             }
-        })
+        }
+        state['adverse_media_results']=agent_results
+        await self.emit_event(agent_results)
 
         return {
             "adverse_media_results": findings,

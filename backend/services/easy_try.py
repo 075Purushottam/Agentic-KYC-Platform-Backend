@@ -15,10 +15,10 @@ def extract_text_from_image(image_path, languages=['en']):
 
     try:
         # Initialize EasyOCR reader
-        reader = easyocr.Reader(languages)  # e.g., ['en', 'hi'] for English + Hindi
-
+        reader = easyocr.Reader(languages,gpu=False, detector='dbnet18')  # e.g., ['en', 'hi'] for English + Hindi
+ 
         # Perform OCR
-        results = reader.readtext(image_path)
+        results = reader.readtext(image_path,decoder='greedy',canvas_size=1280)
 
         # Extract only the text part from results
         extracted_texts = [text for (_, text, _) in results]

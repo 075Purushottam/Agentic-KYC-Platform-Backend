@@ -1,6 +1,6 @@
 import asyncio
 from agents.base_agent import BaseAgent
-
+from services.report_service import build_report_data
 
 class ComplianceAgent(BaseAgent):
     def __init__(self, agent_name="COMPLIANCE_AGENT"):
@@ -11,12 +11,11 @@ class ComplianceAgent(BaseAgent):
             {"status": "RUNNING", "message": "Generating compliance explanation"}
         )
 
-        await asyncio.sleep(2)
+        # await asyncio.sleep(2)
 
         explanation = f""" Customer marked as: {state["final_decision"]} Reason: AML suspicious entity detected. """
         state["completed_agents"].append(self.agent_name)
-        await self.emit_event(
-            {
+        agent_results =             {
                 "status": "COMPLETED",
                 "message": explanation,
                 "phase": "DONE",
@@ -36,17 +35,26 @@ class ComplianceAgent(BaseAgent):
                 },
                 "agent_details": {
                     "agent_name": self.agent_name,
-                    # "description": "Provides a human-readable explanation of the compliance decision based on the analysis results.",
-                    # "capabilities": [
-                    #     "Generate clear explanations for compliance decisions",
-                    #     "Summarize key risk factors and signals",
-                    #     "Support for regulatory reporting requirements"
-                    # ],
                     "input": ["Final Decision", "Risk Score", "Active Signals"],
                     "check": ["Compliance Explanation"],
                     "finding": ["N/A"],
                     "confidence": ["N/A"],
                 },
             }
+        state['compliance_results']=agent_results
+        report = build_report_data(state)
+        
+        state['investigation_report'] = report
+        await self.emit_event(
+            agent_results
         )
+        await self.emit_event({
+
+            "status": "REPORT_READY",
+
+            "case_id": state["case_id"],
+
+            "report": report
+
+        })
         return state

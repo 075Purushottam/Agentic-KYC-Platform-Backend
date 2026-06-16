@@ -1,5 +1,5 @@
 case_store = {}
-
+report_store = {}
 def save_case(case_id,state):
     case_store[case_id] = state
 

@@ -24,9 +24,7 @@ class RiskAgent(BaseAgent):
         state["final_decision"] = decision
 
         state["completed_agents"].append(self.agent_name)
-
-        await self.emit_event(
-            {
+        agent_results =             {
                 "status": "COMPLETED",
                 "message": "Risk analysis completed",
                 "route": decision,
@@ -49,12 +47,6 @@ class RiskAgent(BaseAgent):
 
                 "agent_details": {
                     "agent_name": self.agent_name,
-                    # "description": "Aggregates all risk factors and signals to calculate a final risk score and decision.",
-                    # "capabilities": [
-                    #     "Aggregate risk scores from multiple agents",
-                    #     "Apply decision rules based on risk thresholds",
-                    #     "Provide final compliance decision"
-                    # ],
                     "input": [
                         "Risk Score",
                         "Active Signals"
@@ -65,6 +57,9 @@ class RiskAgent(BaseAgent):
                     "risk_impact": ["N/A"]
                 }
             }
+        state['risk_results']=agent_results
+        await self.emit_event(
+            agent_results
         )
 
         return state

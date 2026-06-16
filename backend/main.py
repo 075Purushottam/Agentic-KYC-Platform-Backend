@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from api.routes import router as api_router
 from websocket_route.websocket_routes import router as websocket_router
 from api.review_routes import router as review_router
+from api.report_routes import router as report_router
 
 app = FastAPI()
 app.add_middleware(
@@ -16,3 +17,4 @@ app.add_middleware(
 app.include_router(api_router)
 app.include_router(websocket_router)
 app.include_router(review_router)
+app.include_router(report_router)
