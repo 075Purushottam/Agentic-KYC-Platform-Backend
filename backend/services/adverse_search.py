@@ -5,23 +5,24 @@ from services.retrieve_articles import extract_articles
 def search(customer_details):
 
     normalized_articles = extract_articles(customer_details)
+    print("Extracted Articles",normalized_articles)
     query = f"""
                 Person Name: {customer_details['name']}
                 Coutry: {customer_details['country']}
-                Organisation
                 Scam
-                Fruad
             """
 
     service = KYCVectorService(persist_directory="./chroma_db")
 
     service.get_or_create_collection(
-        collection_name="vijay_mallya", fallback_articles=normalized_articles
+        collection_name=f"adverse_collection", fallback_articles=normalized_articles
     )
 
     results = service.retrieve_similar_articles(query)
     titles = []
+    print("Retrieved Articles")
     for result in results:
         titles.append(result[0].metadata["title"])
+        print(result[0].metadata["title"])
 
     return titles

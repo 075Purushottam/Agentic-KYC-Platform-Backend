@@ -13,7 +13,7 @@ def refine_adverse_result(customer_info,context):
             Results FORMAT JSON:
             Example:
             {{
-                            "input": [
+                "input": [
                     "Customer Name",
                     "Jurisdiction"
                 ],

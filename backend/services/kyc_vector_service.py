@@ -31,7 +31,8 @@ class KYCVectorService:
         # Initialize embeddings safely
         try:
             self.embeddings = HuggingFaceEmbeddings(
-                model_name=self.embedding_model_name
+                model_name=self.embedding_model_name,
+                model_kwargs={'token':"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"}
             )
             logger.info(
                 f"Successfully initialized embedding model: {self.embedding_model_name}"
@@ -119,7 +120,7 @@ class KYCVectorService:
             )
 
     def retrieve_similar_articles(
-        self, query: str, top_k: int = 20
+        self, query: str, top_k: int = 10
     ) -> List[Tuple[Any, float]]:
         """
         Searches the vector store for documents similar to the query.

@@ -50,7 +50,7 @@ class ComplianceAgent(BaseAgent):
         )
         await self.emit_event({
 
-            "status": "REPORT_READY",
+            "event": "REPORT_READY",
 
             "case_id": state["case_id"],
 
