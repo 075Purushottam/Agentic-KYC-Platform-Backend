@@ -1,7 +1,6 @@
 import httpx
 from services.utils import clean_response
 from services.gemini_client import GeminiClient
-PUBLIC_URL = "https://footage-method-cartridge-hobbies.trycloudflare.com"
 
 SYSTEM_PROMPT = '''You are an expert document information extraction system.
 
@@ -73,6 +72,6 @@ def llm_call(prompt):
         )
     except Exception as e:
         print("Error:",e)
-        response =  {'name': 'PURUSHOTTAM PATIDAR', 'dob': '2000-10-15', 'country': 'India', 'address': 'Gram Bardiya, Post Gurjar Bard, Tehsil Mandsaur, District Mandsaur, Madhya Pradesh - 458895', 'aadhaar_no': '6559 5458 8740', 'pan_no': 'EDZPP3833G', 'father_name': 'SHANKAR LAL PATIDAR', 'gender': 'MALE', 'pincode': '458895', 'state': 'Madhya Pradesh', 'city': 'Mandsaur'}
+        response =  {}
         return response
     return clean_response(response)

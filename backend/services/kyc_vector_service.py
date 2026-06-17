@@ -32,7 +32,7 @@ class KYCVectorService:
         try:
             self.embeddings = HuggingFaceEmbeddings(
                 model_name=self.embedding_model_name,
-                model_kwargs={'token':"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"}
+                model_kwargs={'token':"your-hf-token"}
             )
             logger.info(
                 f"Successfully initialized embedding model: {self.embedding_model_name}"

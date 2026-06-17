@@ -2,10 +2,11 @@
 from google import genai
 from google.genai import types
 import os
+
 class GeminiClient:
     
     def __init__(self):
-        self.client = genai.Client(api_key="AIzaSyDVAJjWWJmZTu6wkZwLbTmwIN5fPuXMaHY")
+        self.client = genai.Client(api_key="your-api-key")
 
     def generate_text(self, messages, system_instruction, model="gemini-2.0-flash"):
         response = self.client.models.generate_content(
